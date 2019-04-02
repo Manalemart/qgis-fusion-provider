@@ -77,7 +77,7 @@ class ClipData(FusionAlgorithm):
 
         self.addParameter(QgsProcessingParameterFileDestination(self.OUTPUT,
                                                                 self.tr('Output'),
-                                                                'las'))
+                                                                self.tr('LAS files (*.las *.LAS)')))
         ground = QgsProcessingParameterFile(
             self.DTM, self.tr('Ground file for height normalization'), optional = True)
         ground.setFlags(ground.flags() | QgsProcessingParameterDefinition.FlagAdvanced)
@@ -100,11 +100,7 @@ class ClipData(FusionAlgorithm):
         if height:
             commands.append('/height')
 
-        files = self.parameterAsString(parameters, self.INPUT, context).split(';')
-        if len(files) == 1:
-            commands.append(files)
-        else:
-            commands.append(fusionUtils.filenamesToFile(files))
+        self.addInputFilesToCommands(commands, parameters, self.INPUT, context)        
         
         outputFile = self.parameterAsFileOutput(parameters, self.OUTPUT, context)
         commands.append(outputFile)

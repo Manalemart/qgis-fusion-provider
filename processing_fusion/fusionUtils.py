@@ -87,7 +87,7 @@ def layersToFile(fileName, alg, parameters, parameter, context, quote=True):
     return listFile
 
 def filenamesToFile(files):
-    listFile = QgsProcessingUtils.generateTempFilename(fileName)
+    listFile = QgsProcessingUtils.generateTempFilename("inputfiles.txt")
     with open(listFile, 'w', encoding='utf-8') as f:
         f.write('\n'.join(files))
 

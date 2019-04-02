@@ -105,12 +105,8 @@ class ImageCreate(FusionAlgorithm):
         outputFile = self.parameterAsFileOutput(parameters, self.OUTPUT, context)
         commands.append(outputFile)
         commands.append(str(self.parameterAsDouble(parameters, self.PIXEL, context)))
-        files = self.parameterAsString(parameters, self.INPUT, context).split(';')
-        if len(files) == 1:
-            commands.append(files)
-        else:
-            commands.append(fusionUtils.filenamesToFile(files))
-                
+        self.addInputFilesToCommands(commands, parameters, self.INPUT, context)        
+
         fusionUtils.execute(commands, feedback)
 
         return {self.OUTPUT, outputFile}

@@ -99,7 +99,7 @@ class TinSurfaceCreate(FusionAlgorithm):
         if class_var:
             commands.append('/class:' + class_var)
         return_sel = self.parameterAsString(parameters, self.RETURN, context).strip()
-        if unicode(return_sel).strip():
+        if return_sel:
             commands.append('/return:' + return_sel)
         
         outputFile = self.parameterAsFileOutput(parameters, self.OUTPUT, context)
@@ -112,12 +112,8 @@ class TinSurfaceCreate(FusionAlgorithm):
         commands.append('0')
         commands.append('0')
 
-        files = self.parameterAsString(parameters, self.INPUT, context).split(';')
-        if len(files) == 1:
-            commands.append(files)
-        else:
-            commands.append(fusionUtils.filenamesToFile(files))
-        
+        self.addInputFilesToCommands(commands, parameters, self.INPUT, context)        
+
         fusionUtils.execute(commands, feedback)
 
         return {self.OUTPUT, outputFile}

@@ -82,7 +82,7 @@ class FilterData(FusionAlgorithm):
             defaultValue = 10))
         self.addParameter(QgsProcessingParameterFileDestination(self.OUTPUT,
                                                                 self.tr('Output filtered LAS file'),
-                                                                'las'))
+                                                                self.tr('LAS files (*.las *.LAS)')))
         self.addAdvancedModifiers()
 
     def processAlgorithm(self, parameters, context, feedback):

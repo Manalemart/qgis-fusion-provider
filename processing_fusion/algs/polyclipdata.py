@@ -79,7 +79,7 @@ class PolyClipData(FusionAlgorithm):
             extension = self.tr('Shapefile files (*.shp *.SHP)')))
         self.addParameter(QgsProcessingParameterFileDestination(self.OUTPUT,
                                                                 self.tr('Output clipped LAS file'),
-                                                                'las'))
+                                                                self.tr('LAS files (*.las *.LAS)')))
         self.addParameter(QgsProcessingParameterBoolean(self.SHAPE,
                                            self.tr('Use Shape attribute'), False))
         ##  'field' e 'value' box should appear or get activated if Shape attribute is switched ON
@@ -98,12 +98,8 @@ class PolyClipData(FusionAlgorithm):
         
         outputFile = self.parameterAsFileOutput(parameters, self.OUTPUT, context)
         commands.append(outputFile)
-        files = self.parameterAsString(parameters, self.INPUT, context).split(';')
-        if len(files) == 1:
-            commands.append(files)
-        else:
-            commands.append(fusionUtils.filenamesToFile(files))            
-
+        self.addInputFilesToCommands(commands, parameters, self.INPUT, context)        
+          
         fusionUtils.execute(commands, feedback)
 
         return {self.OUTPUT, outputFile}

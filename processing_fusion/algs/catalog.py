@@ -111,12 +111,8 @@ class Catalog(FusionAlgorithm):
         
         self.addAdvancedModifiersToCommands(commands, parameters, context)
 
-        files = self.parameterAsString(parameters, self.INPUT, context).split(';')
-        if len(files) == 1:
-            commands.append(files)
-        else:
-            commands.append(fusionUtils.filenamesToFile(files))
-                
+        self.addInputFilesToCommands(commands, parameters, self.INPUT, context)        
+
         outputFile = self.parameterAsFileOutput(parameters, self.OUTPUT, context)
         commands.append(outputFile)
         

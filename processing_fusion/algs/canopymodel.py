@@ -150,12 +150,7 @@ class CanopyModel(FusionAlgorithm):
         commands.append('0')
         commands.append('0')
         commands.append('0')
-        
-        files = self.parameterAsString(parameters, self.INPUT, context).split(';')
-        if len(files) == 1:
-            commands.append(files)
-        else:
-            commands.append(fusionUtils.filenamesToFile(files))
+        self.addInputFilesToCommands(commands, parameters, self.INPUT, context)        
 
         fusionUtils.execute(commands, feedback)
 

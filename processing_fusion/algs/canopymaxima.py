@@ -75,7 +75,7 @@ class CanopyMaxima(FusionAlgorithm):
         self.addParameter(QgsProcessingParameterFile(
             self.INPUT, self.tr('Input FUSION canopy height model')))
         self.addParameter(QgsProcessingParameterFile(
-            self.GROUND, self.tr('Input ground .dtm layer'), extension = self.tr('DTM files (*.dtm *.DTM)'),
+            self.GROUND, self.tr('Input ground .dtm layer'), extension = 'dtm',
             optional = True))
         self.addParameter(QgsProcessingParameterNumber(
             self.THRESHOLD, self.tr('Height threshold'), QgsProcessingParameterNumber.Double,
@@ -110,11 +110,7 @@ class CanopyMaxima(FusionAlgorithm):
         if ground:
             commands.append('/ground:' + ground)
         commands.append('/threshold:{}'.format(self.parameterAsDouble(parameters, self.THRESHOLD, context)))                        
-        files = self.parameterAsString(parameters, self.INPUT, context).split(';')
-        if len(files) == 1:
-            commands.append(files)
-        else:
-            commands.append(fusionUtils.filenamesToFile(files))
+        self.addInputFilesToCommands(commands, parameters, self.INPUT, context)        
         
         self.addAdvancedModifiersToCommands(commands, parameters, context)
         outputFile = self.parameterAsFileOutput(parameters, self.OUTPUT, context)
