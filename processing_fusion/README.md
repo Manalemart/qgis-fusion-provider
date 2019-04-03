@@ -7,8 +7,6 @@ This plugin is a port to QGIS 3 of the original FUSION provider that was a core 
 
 It is based on the initial porting of the FUSION provider to QGIS 3, done by Alexander Bruy.
 
-
-
 Installation
 --------------
 
@@ -21,5 +19,7 @@ You do not need to install FUSION or configure it. The required FUSION binaries 
 Limitations
 --------------
 
-Currently, QGIS does not allow multiple files to be selected for the QgsProcessingParameterFile
+Currently, QGIS does not allow multiple files to be selected for the QgsProcessingParameterFile class. That means that, although most of the FUSION algorithms accept a set of .las files as input, you will only be able to select one in the corresponding file selector. 
+
+You can, however, use a multiple input by directly typing the filepaths (not selecting it in the file selector) in the textbox, separated by semicolons (;)
 
