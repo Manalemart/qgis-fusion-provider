@@ -54,6 +54,7 @@ from processing_fusion.algs.imagecreate import ImageCreate
 from processing_fusion.algs.mergedata import MergeData
 from processing_fusion.algs.intensityimage import IntensityImage
 from processing_fusion.algs.filterdata import FilterData
+from processing_fusion.algs.gridmetrics import GridMetrics
 
 from processing_fusion import fusionUtils
 

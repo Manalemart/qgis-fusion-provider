@@ -63,7 +63,7 @@ class PolyClipData(FusionAlgorithm):
         return 'points'
 
     def tags(self):
-        return self.tr('lidar')
+        return [self.tr('lidar')]
 
     def shortHelpString(self):
         return ''
@@ -90,7 +90,7 @@ class PolyClipData(FusionAlgorithm):
 
     def processAlgorithm(self, parameters, context, feedback):
         commands = [os.path.join(fusionUtils.fusionDirectory(), 'PolyClipData.exe')]
-        if self.parameterAsBoolean(parameters, self.SHAPE, context):
+        if self.parameterAsBool(parameters, self.SHAPE, context):
             commands.append('/shape:' + self.parameterAsString(parameters, self.FIELD, context) + ','
                             + self.parameterAsString(parameters, self.VALUE, context))
         self.addAdvancedModifiersToCommands(commands, parameters, context)
@@ -102,4 +102,4 @@ class PolyClipData(FusionAlgorithm):
           
         fusionUtils.execute(commands, feedback)
 
-        return {self.OUTPUT, outputFile}
+        return self.prepareReturn(parameters)

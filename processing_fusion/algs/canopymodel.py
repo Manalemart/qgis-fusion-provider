@@ -71,7 +71,7 @@ class CanopyModel(FusionAlgorithm):
         return 'points'
 
     def tags(self):
-        return self.tr('lidar')
+        return [self.tr('lidar')]
 
     def shortHelpString(self):
         return ''
@@ -129,13 +129,13 @@ class CanopyModel(FusionAlgorithm):
         smooth= self.parameterAsString(parameters, self.SMOOTH, context).strip()
         if smooth:
             commands.append('/smooth:' + smooth)
-        slope = self.parameterAsBoolean(parameters, self.SLOPE, context)
+        slope = self.parameterAsBool(parameters, self.SLOPE, context)
         if slope:
             commands.append('/slope') 
         class_var = self.parameterAsString(parameters, self.CLASS, context).strip()
         if class_var:
             commands.append('/class:' + class_var)
-        ascii = self.parameterAsBoolean(parameters, self.ASCII, context).strip()
+        ascii = self.parameterAsBool(parameters, self.ASCII, context)
         if ascii:
             commands.append('/ascii')
         
@@ -144,8 +144,8 @@ class CanopyModel(FusionAlgorithm):
         outputFile = self.parameterAsFileOutput(parameters, self.OUTPUT_DTM, context)
         commands.append(outputFile)
         commands.append(str(self.parameterAsDouble(parameters, self.CELLSIZE, context)))
-        commands.append(self.UNITS[self.parameterAsInt(parameters, self.XYUNITS, context)][0])
-        commands.append(self.UNITS[self.getParameterAsInt(parameters, self.ZUNITS, context)][0])
+        commands.append(self.UNITS[self.parameterAsEnum(parameters, self.XYUNITS, context)][0])
+        commands.append(self.UNITS[self.parameterAsEnum(parameters, self.ZUNITS, context)][0])
         commands.append('0')
         commands.append('0')
         commands.append('0')
@@ -154,4 +154,4 @@ class CanopyModel(FusionAlgorithm):
 
         fusionUtils.execute(commands, feedback)
 
-        return {self.OUTPUT_DTM, outputFile}
+        return self.prepareReturn(parameters)

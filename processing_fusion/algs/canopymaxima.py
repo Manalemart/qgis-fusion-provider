@@ -63,7 +63,7 @@ class CanopyMaxima(FusionAlgorithm):
         return 'points'
 
     def tags(self):
-        return self.tr('lidar')
+        return [self.tr('lidar')]
 
     def shortHelpString(self):
         return ''
@@ -101,11 +101,12 @@ class CanopyMaxima(FusionAlgorithm):
         commands.append('/wse:{},0,{},0'.format(self.parameterAsDouble(parameters, self.PARAM_A, context), 
                                             self.parameterAsDouble(parameters, self.PARAM_C, context)))
         
-        summary = self.parameterAsBoolean(parameters, self.SUMMARY, context)
+        summary = self.parameterAsBool(parameters, self.SUMMARY, context)
         if summary:
             commands.append('/summary')
         
-        self.addAdvancedModifiersToCommands(commands)
+        self.addAdvancedModifiersToCommands(commands, parameters, context)
+
         ground = self.parameterAsString(parameters, self.GROUND, context).strip()       
         if ground:
             commands.append('/ground:' + ground)
@@ -118,4 +119,4 @@ class CanopyMaxima(FusionAlgorithm):
         
         fusionUtils.execute(commands, feedback)
 
-        return {self.OUTPUT, outputFile}
+        return self.prepareReturn(parameters)

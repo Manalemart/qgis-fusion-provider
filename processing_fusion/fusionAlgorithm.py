@@ -43,6 +43,7 @@ class FusionAlgorithm(QgsProcessingAlgorithm):
 
     def __init__(self):
         super().__init__()
+        self.output_values = {}
 
     def createInstance(self):
         return type(self)()
@@ -63,7 +64,20 @@ class FusionAlgorithm(QgsProcessingAlgorithm):
         if len(files) == 1:
             commands.append(files[0])
         else:
-            commands.append(fusionUtils.filenamesToFile(files))            
+            commands.append(fusionUtils.filenamesToFile(files))
+
+    def setOutputValue(self, name, value):
+        self.output_values[name] = value
+
+    def prepareReturn(self, parameters):
+        results = {}
+        for o in self.outputDefinitions():
+            if o.name() in parameters:
+                results[o.name()] = parameters[o.name()]
+        for k, v in self.output_values.items():
+            results[k] = v
+
+        return results         
 
     def icon(self):
         return QIcon(os.path.join(pluginPath, 'icons', 'fusion.svg'))

@@ -47,6 +47,7 @@ class ImageCreate(FusionAlgorithm):
     RGB = 'RGB'
     SWITCH = 'SWITCH'
     OUTPUT = 'OUTPUT'
+    coloroptions = ['Intensity', 'Elevation', 'Height']
 
     def name(self):
         return 'imagecreate'
@@ -61,7 +62,7 @@ class ImageCreate(FusionAlgorithm):
         return 'points'
 
     def tags(self):
-        return self.tr('lidar')
+        return [self.tr('lidar')]
 
     def shortHelpString(self):
         return ''
@@ -69,18 +70,16 @@ class ImageCreate(FusionAlgorithm):
     def __init__(self):
         super().__init__()
 
-
     def initAlgorithm(self, config=None):    
         self.addParameter(QgsProcessingParameterFile(
             self.INPUT, self.tr('Input LAS layer'), extension = 'las'))        
         self.addParameter(QgsProcessingParameterFileDestination(self.OUTPUT,
                                                                 self.tr('Output image')))        
         self.addParameter(QgsProcessingParameterEnum(
-            self.COLOROPTION, self.tr('Method to assign color'),
-            ['Intensity', 'Elevation', 'Height']))
+            self.COLOROPTION, self.tr('Method to assign color'), self.coloroptions))
         self.addParameter(QgsProcessingParameterFile(
             self.GROUND, self.tr("Ground file (used with 'Height' method)"), 
-            extension = self.tr('DTM files (*.dtm *.DTM)')))        
+            extension = self.tr('DTM files (*.dtm *.DTM)'), optional = True))
         self.addParameter(QgsProcessingParameterBoolean(
             self.RGB, self.tr('Use RGB color model to create the color ramp'), False))
         self.addParameter(QgsProcessingParameterNumber(
@@ -90,14 +89,16 @@ class ImageCreate(FusionAlgorithm):
             self.SWITCH, self.tr('Output format'), ['JPEG', 'Bitmap']))        
 
     def processAlgorithm(self, parameters, context, feedback):
-        commands = [os.path.join(fusionUtils.fusionDirectory(), 'ImageCreate.exe')]        
-        commands.append('/coloroption:' + self.parameterAsString(parameters, self.COLOROPTION, context))
+        commands = [os.path.join(fusionUtils.fusionDirectory(), 'ImageCreate.exe')]   
+        commands.append('/coloroption:' + self.coloroptions[self.parameterAsEnum(parameters, self.COLOROPTION, context)])
         ground = self.parameterAsString(parameters, self.GROUND, context).strip()
         if ground:
             commands.append('/dtm:' + ground)
-        if self.parameterAsBoolean(parameters, self.RGB, context):
+        if self.parameterAsBool(parameters, self.RGB, context):
             commands.append('/rgb')
-        if self.parameterAsString(parameters, self.SWITCH, context) == 'JPEG':
+
+        print( "val:" + self.parameterAsString(parameters, self.SWITCH, context))
+        if self.parameterAsEnum(parameters, self.SWITCH, context) == 0:
             commands.append('/jpg')
         else:
             commands.append('/bmp')
@@ -108,5 +109,5 @@ class ImageCreate(FusionAlgorithm):
         self.addInputFilesToCommands(commands, parameters, self.INPUT, context)        
 
         fusionUtils.execute(commands, feedback)
-
-        return {self.OUTPUT, outputFile}
+        
+        return self.prepareReturn(parameters)

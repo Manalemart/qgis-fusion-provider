@@ -62,7 +62,7 @@ class TinSurfaceCreate(FusionAlgorithm):
         return 'surface'
 
     def tags(self):
-        return self.tr('lidar')
+        return [self.tr('lidar')]
 
     def shortHelpString(self):
         return ''
@@ -105,8 +105,8 @@ class TinSurfaceCreate(FusionAlgorithm):
         outputFile = self.parameterAsFileOutput(parameters, self.OUTPUT, context)
         commands.append(outputFile)
         commands.append(str(self.parameterAsDouble(parameters, self.CELLSIZE, context)))
-        commands.append(self.UNITS[self.parameterAsInt(parameters, self.XYUNITS, context)][0])
-        commands.append(self.UNITS[self.getParameterAsInt(parameters, self.ZUNITS, context)][0])
+        commands.append(self.UNITS[self.parameterAsEnum(parameters, self.XYUNITS, context)][0])
+        commands.append(self.UNITS[self.parameterAsEnum(parameters, self.ZUNITS, context)][0])
         commands.append('0')
         commands.append('0')
         commands.append('0')
@@ -116,4 +116,4 @@ class TinSurfaceCreate(FusionAlgorithm):
 
         fusionUtils.execute(commands, feedback)
 
-        return {self.OUTPUT, outputFile}
+        return self.prepareReturn(parameters)

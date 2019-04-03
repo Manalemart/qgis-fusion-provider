@@ -53,7 +53,7 @@ class ClipData(FusionAlgorithm):
         return 'points'
 
     def tags(self):
-        return self.tr('lidar')
+        return [self.tr('lidar')]
 
     def shortHelpString(self):
         return ''
@@ -92,7 +92,7 @@ class ClipData(FusionAlgorithm):
     def processAlgorithm(self, parameters, context, feedback):
         commands = [os.path.join(fusionUtils.fusionDirectory(), 'ClipData.exe')]
         self.addAdvancedModifiersToCommands(commands, parameters, context)
-        commands.append('/shape:' + self.parameterAsString(parameters, self.SHAPE, context))
+        commands.append('/shape:' + self.parameterAsEnum(parameters, self.SHAPE, context))
         dtm = self.parameterAsString(parameters, self.DTM, context)
         if dtm:
             commands.append('/dtm:' + dtm)
@@ -113,4 +113,4 @@ class ClipData(FusionAlgorithm):
         
         fusionUtils.execute(commands, feedback)
 
-        return {self.OUTPUT, outputFile}
+        return self.prepareReturn(parameters)

@@ -58,7 +58,7 @@ class GroundFilter(FusionAlgorithm):
         return 'points'
 
     def tags(self):
-        return self.tr('lidar')
+        return [self.tr('lidar')]
 
     def shortHelpString(self):
         return ''
@@ -85,7 +85,7 @@ class GroundFilter(FusionAlgorithm):
     def processAlgorithm(self, parameters, context, feedback):
         commands = [os.path.join(fusionUtils.fusionDirectory(), 'GroundFilter.exe')]        
         self.addAdvancedModifiersToCommands(commands, parameters, context)
-        if self.parameterAsBoolean(parameters, self.SURFACE, context):
+        if self.parameterAsBool(parameters, self.SURFACE, context):
             commands.append('/surface')
 
         outputFile = self.parameterAsFileOutput(parameters, self.OUTPUT, context)
@@ -95,4 +95,4 @@ class GroundFilter(FusionAlgorithm):
 
         fusionUtils.execute(commands, feedback)
 
-        return {self.OUTPUT, outputFile}
+        return self.prepareReturn(parameters)

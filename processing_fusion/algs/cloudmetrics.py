@@ -63,7 +63,7 @@ class CloudMetrics(FusionAlgorithm):
         return 'points'
 
     def tags(self):
-        return self.tr('lidar')
+        return [self.tr('lidar')]
 
     def shortHelpString(self):
         return ''
@@ -108,10 +108,10 @@ class CloudMetrics(FusionAlgorithm):
         if htmin:
             commands.append('/minht:' + htmin)
         
-        firstImpulse = self.parameterAsBoolean(parameters, self.FIRSTIMPULSE, context)
+        firstImpulse = self.parameterAsBool(parameters, self.FIRSTIMPULSE, context)
         if firstImpulse:
             commands.append('/firstinpulse') 
-        firstReturn = self.parameterAsBoolean(parameters, self.FIRSTRETURN, context)
+        firstReturn = self.parameterAsBool(parameters, self.FIRSTRETURN, context)
         if firstReturn:
             commands.append('/firstreturn') 
 
@@ -122,4 +122,4 @@ class CloudMetrics(FusionAlgorithm):
 
         fusionUtils.execute(commands, feedback)
 
-        return {self.OUTPUT_DTM, outputFile}
+        return self.prepareReturn(parameters)

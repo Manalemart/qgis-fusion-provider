@@ -62,7 +62,7 @@ class IntensityImage(FusionAlgorithm):
         return 'points'
 
     def tags(self):
-        return self.tr('lidar')
+        return [self.tr('lidar')]
 
     def shortHelpString(self):
         return ''
@@ -90,13 +90,13 @@ class IntensityImage(FusionAlgorithm):
 
     def processAlgorithm(self, parameters, context, feedback):
         commands = [os.path.join(fusionUtils.fusionDirectory(), 'IntensityImage.exe')]
-        if self.parameterAsBoolean(parameters, self.ALLRET, context):
+        if self.parameterAsBool(parameters, self.ALLRET, context):
             commands.append('/allreturns')
-        if self.parameterAsBoolean(parameters, self.LOWEST, context):
+        if self.parameterAsBool(parameters, self.LOWEST, context):
             commands.append('/lowest')
-        if self.parameterAsBoolean(parameters, self.HIST, context):
+        if self.parameterAsBool(parameters, self.HIST, context):
             commands.append('/hist')
-        if self.parameterAsString(parameters, self.SWITCH, context) == "JPEG":
+        if self.parameterAsEnum(parameters, self.SWITCH, context) == 0:
             commands.append('/jpg')
         commands.append(str(self.parameterAsDouble(parameters, self.PIXEL, context)))
         
@@ -106,4 +106,4 @@ class IntensityImage(FusionAlgorithm):
 
         fusionUtils.execute(commands, feedback)
 
-        return {self.OUTPUT, outputFile}
+        return self.prepareReturn(parameters)
