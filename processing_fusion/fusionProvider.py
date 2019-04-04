@@ -55,6 +55,8 @@ from processing_fusion.algs.mergedata import MergeData
 from processing_fusion.algs.intensityimage import IntensityImage
 from processing_fusion.algs.filterdata import FilterData
 from processing_fusion.algs.gridmetrics import GridMetrics
+from processing_fusion.algs.gridsurfacecreate import GridSurfaceCreate
+from processing_fusion.algs.openviewer import OpenViewer
 
 from processing_fusion import fusionUtils
 
@@ -122,7 +124,9 @@ class FusionProvider(QgsProcessingProvider):
                 ImageCreate(),
                 MergeData(),
                 IntensityImage(),
-                FilterData()
+                FilterData(),
+                GridSurfaceCreate(),
+                OpenViewer()
                ]
 
         return algs
