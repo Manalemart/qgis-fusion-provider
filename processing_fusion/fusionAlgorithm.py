@@ -79,6 +79,9 @@ class FusionAlgorithm(QgsProcessingAlgorithm):
 
         return results         
 
+    def helpUrl(self):
+        return "http://forsys.cfr.washington.edu/Software/FUSION/FUSION_manual.pdf"
+
     def icon(self):
         return QIcon(os.path.join(pluginPath, 'icons', 'fusion.svg'))
 
