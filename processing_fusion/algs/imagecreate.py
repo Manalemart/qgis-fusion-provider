@@ -104,7 +104,7 @@ class ImageCreate(FusionAlgorithm):
             commands.append('/bmp')
         
         outputFile = self.parameterAsFileOutput(parameters, self.OUTPUT, context)
-        commands.append(outputFile)
+        commands.append('"%s"' % outputFile)
         commands.append(str(self.parameterAsDouble(parameters, self.PIXEL, context)))
         self.addInputFilesToCommands(commands, parameters, self.INPUT, context)        
 

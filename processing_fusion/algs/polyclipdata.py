@@ -97,7 +97,7 @@ class PolyClipData(FusionAlgorithm):
         commands.append(self.parameterAsString(parameters, self.MASK, context))
         
         outputFile = self.parameterAsFileOutput(parameters, self.OUTPUT, context)
-        commands.append(outputFile)
+        commands.append('"%s"' % outputFile)
         self.addInputFilesToCommands(commands, parameters, self.INPUT, context)        
           
         fusionUtils.execute(commands, feedback)

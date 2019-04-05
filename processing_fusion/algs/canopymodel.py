@@ -142,7 +142,7 @@ class CanopyModel(FusionAlgorithm):
         self.addAdvancedModifiersToCommands(commands, parameters, context)
 
         outputFile = self.parameterAsFileOutput(parameters, self.OUTPUT_DTM, context)
-        commands.append(outputFile)
+        commands.append('"%s"' % outputFile)
         commands.append(str(self.parameterAsDouble(parameters, self.CELLSIZE, context)))
         commands.append(self.UNITS[self.parameterAsEnum(parameters, self.XYUNITS, context)][0])
         commands.append(self.UNITS[self.parameterAsEnum(parameters, self.ZUNITS, context)][0])

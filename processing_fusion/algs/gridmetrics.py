@@ -132,7 +132,7 @@ class GridMetrics(FusionAlgorithm):
         commands.append(self.parameterAsString(parameters, self.GROUND, context))
         commands.append(str(self.parameterAsDouble(parameters, self.HEIGHT, context)))
         commands.append(str(self.parameterAsDouble(parameters, self.CELLSIZE, context)))
-        commands.append(self.parameterAsFileOutput(parameters, self.OUTPUT_CSV_ELEVATION, context))
+        commands.append('"%s"' % self.parameterAsFileOutput(parameters, self.OUTPUT_CSV_ELEVATION, context))
         self.addInputFilesToCommands(commands, parameters, self.INPUT, context) 
 
         fusionUtils.execute(commands, feedback)

@@ -62,7 +62,7 @@ class FusionAlgorithm(QgsProcessingAlgorithm):
     def addInputFilesToCommands(self, commands, parameters, parameterName, context):
         files = self.parameterAsString(parameters, parameterName, context).split(';')
         if len(files) == 1:
-            commands.append(files[0])
+            commands.append('"%s"' % files[0])
         else:
             commands.append(fusionUtils.filenamesToFile(files))
 

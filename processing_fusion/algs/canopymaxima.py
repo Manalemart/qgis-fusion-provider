@@ -115,7 +115,7 @@ class CanopyMaxima(FusionAlgorithm):
         
         self.addAdvancedModifiersToCommands(commands, parameters, context)
         outputFile = self.parameterAsFileOutput(parameters, self.OUTPUT, context)
-        commands.append(outputFile)
+        commands.append('"%s"' % outputFile)
         
         fusionUtils.execute(commands, feedback)
 

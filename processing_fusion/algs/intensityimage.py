@@ -101,7 +101,7 @@ class IntensityImage(FusionAlgorithm):
         commands.append(str(self.parameterAsDouble(parameters, self.PIXEL, context)))
         
         outputFile = self.parameterAsFileOutput(parameters, self.OUTPUT, context)
-        commands.append(outputFile)
+        commands.append('"%s"' % outputFile)
         self.addInputFilesToCommands(commands, parameters, self.INPUT, context)        
 
         fusionUtils.execute(commands, feedback)
