@@ -38,10 +38,12 @@ from processing.core.ProcessingConfig import ProcessingConfig
 
 FUSION_ACTIVE = 'FUSION_ACTIVE'
 FUSION_VERBOSE = 'FUSION_VERBOSE'
+FUSION_DIRECTORY = 'FUSION_DIRECTORY'
 
 
 def fusionDirectory():
-    return os.path.join(os.path.dirname(__file__), "bin")
+    filePath = ProcessingConfig.getSetting(FUSION_DIRECTORY)
+    return filePath if filePath is not None else ''
 
 
 def execute(commands, feedback=None):

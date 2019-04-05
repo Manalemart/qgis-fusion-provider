@@ -82,7 +82,12 @@ class FusionProvider(QgsProcessingProvider):
         ProcessingConfig.addSetting(Setting(self.name(),
                                             fusionUtils.FUSION_ACTIVE,
                                             self.tr('Activate'),
-                                            False))        
+                                            False))
+        ProcessingConfig.addSetting(Setting(self.name(),
+                                            fusionUtils.FUSION_DIRECTORY,
+                                            self.tr('FUSION directory'),
+                                            fusionUtils.fusionDirectory(),
+                                            valuetype=Setting.FOLDER))        
         ProcessingConfig.addSetting(Setting(self.name(),
                                             fusionUtils.FUSION_VERBOSE,
                                             self.tr('Log commands output'),

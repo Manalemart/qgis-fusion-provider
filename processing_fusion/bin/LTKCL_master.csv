@@ -1,4 +1,0 @@
-Program,Version,Program build date,Command line,Start time,Stop time,Elapsed time (seconds),Status
-"FilterData",1.65,"Aug  6 2018 10:54:57"," outlier 4.0 10 d:\test.lda  D:\fusiondata\000001.las","Tue Apr 02 13:49:48 2019","Tue Apr 02 13:49:48 2019",0,Success
-"FilterData",1.65,"Aug  6 2018 10:54:57"," outlier 1.0 10.0 C:/Users/victor/AppData/Local/Temp/processing_f2bdce5f6ec04453b91b84d026119f3e/56963517935549d59a8b77dbc5619b85/OUTPUT.file D:\fusiondata\000001.las","Tue Apr 02 14:00:38 2019","Tue Apr 02 14:00:38 2019",0,Success
-"DTM2TIF",1.21,"Aug  6 2018 10:54:50"," D:\fusiondata\Example_UTM\demo_4800K_UTM.dtm C:/Users/victor/AppData/Local/Temp/processing_f2bdce5f6ec04453b91b84d026119f3e/dfaa2164c7e84e3e9ae676cf61d2dd74/OUTPUT.tif","Tue Apr 02 14:02:50 2019","Tue Apr 02 14:02:50 2019",0,Success
