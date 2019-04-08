@@ -56,10 +56,10 @@ class ImageCreate(FusionAlgorithm):
         return self.tr('Image create')
 
     def group(self):
-        return self.tr('Points')
+        return self.tr('Surface')
 
     def groupId(self):
-        return 'points'
+        return 'surface'
 
     def tags(self):
         return [self.tr('lidar')]

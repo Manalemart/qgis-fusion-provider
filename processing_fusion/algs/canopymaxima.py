@@ -57,7 +57,7 @@ class CanopyMaxima(FusionAlgorithm):
         return self.tr('Canopy maxima')
 
     def group(self):
-        return self.tr('Points')
+        return self.tr('Point cloud analysis')
 
     def groupId(self):
         return 'points'

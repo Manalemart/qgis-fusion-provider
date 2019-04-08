@@ -47,10 +47,10 @@ class ClipData(FusionAlgorithm):
         return self.tr('Clip data')
 
     def group(self):
-        return self.tr('Points')
+        return self.tr('Surface')
 
     def groupId(self):
-        return 'points'
+        return 'surface'
 
     def tags(self):
         return [self.tr('lidar')]

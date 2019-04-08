@@ -54,7 +54,7 @@ class FilterData(FusionAlgorithm):
         return self.tr('Filter data outliers')
 
     def group(self):
-        return self.tr('Points')
+        return self.tr('Point cloud analysis')
 
     def groupId(self):
         return 'points'

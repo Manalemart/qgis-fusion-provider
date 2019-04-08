@@ -52,7 +52,7 @@ class GroundFilter(FusionAlgorithm):
         return self.tr('Ground filter')
 
     def group(self):
-        return self.tr('Points')
+        return self.tr('Point cloud analysis')
 
     def groupId(self):
         return 'points'

@@ -56,7 +56,7 @@ class IntensityImage(FusionAlgorithm):
         return self.tr('Intensity image')
 
     def group(self):
-        return self.tr('Points')
+        return self.tr('Surface')
 
     def groupId(self):
         return 'points'

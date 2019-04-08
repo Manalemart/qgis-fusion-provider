@@ -57,7 +57,7 @@ class CloudMetrics(FusionAlgorithm):
         return self.tr('Canopy model')
 
     def group(self):
-        return self.tr('Points')
+        return self.tr('Point cloud analysis')
 
     def groupId(self):
         return 'points'

@@ -48,7 +48,7 @@ class Catalog(FusionAlgorithm):
         return self.tr('Catalog')
 
     def group(self):
-        return self.tr('Points')
+        return self.tr('Point cloud analysis')
 
     def groupId(self):
         return 'points'

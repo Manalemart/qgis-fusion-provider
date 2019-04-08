@@ -65,7 +65,7 @@ class GridMetrics(FusionAlgorithm):
         return self.tr('Grid metrics')
 
     def group(self):
-        return self.tr('Points')
+        return self.tr('Point cloud analysis')
 
     def groupId(self):
         return 'points'
