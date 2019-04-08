@@ -57,7 +57,7 @@ class PolyClipData(FusionAlgorithm):
         return self.tr('Poly clip data')
 
     def group(self):
-        return self.tr('Points')
+        return self.tr('Point cloud analysis')
 
     def groupId(self):
         return 'points'
@@ -70,7 +70,6 @@ class PolyClipData(FusionAlgorithm):
 
     def __init__(self):
         super().__init__()
-
 
     def initAlgorithm(self, config=None):
         self.addParameter(QgsProcessingParameterFile(

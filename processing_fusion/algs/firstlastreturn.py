@@ -50,7 +50,7 @@ class FirstLastReturn(FusionAlgorithm):
         return self.tr('First & last return')
 
     def group(self):
-        return self.tr('Points')
+        return self.tr('Point cloud analysis')
 
     def groupId(self):
         return 'points'

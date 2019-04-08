@@ -48,7 +48,7 @@ class MergeData(FusionAlgorithm):
         return self.tr('Merge LAS files')
 
     def group(self):
-        return self.tr('Points')
+        return self.tr('Point cloud analysis')
 
     def groupId(self):
         return 'points'

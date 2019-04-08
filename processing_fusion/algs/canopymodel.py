@@ -65,10 +65,10 @@ class CanopyModel(FusionAlgorithm):
         return self.tr('Canopy model')
 
     def group(self):
-        return self.tr('Points')
+        return self.tr('Surface')
 
     def groupId(self):
-        return 'points'
+        return 'surface'
 
     def tags(self):
         return [self.tr('lidar')]
